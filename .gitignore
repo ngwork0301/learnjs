@@ -2,3 +2,6 @@
 dist
 working
 master
+
+# python
+.python-version
