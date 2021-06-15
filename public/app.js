@@ -19,7 +19,7 @@ learnjs.showView = function (hash) {
         $('.view-container').empty().append(viewFn(hashParts[1]));
     }
 }
-learnjs.applyObject = function() {
+learnjs.applyObject = function(obj, elem) {
   for (var key in obj) {
     elem.find('[data-name="' + key + '"]').text(obj[key]);
   }
