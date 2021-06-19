@@ -39,7 +39,8 @@ learnjs.template = function (name) {
 learnjs.showView = function (hash) {
     var routes = {
         '#problem': learnjs.problemView,
-        '': learnjs.landingView
+        '#': learnjs.landingView,
+        '': learnjs.landingView,
     };
     var hashParts = hash.split('-');
     var viewFn = routes[hashParts[0]];

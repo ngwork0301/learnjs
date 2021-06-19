@@ -1,4 +1,8 @@
 describe('LearnJS', function () {
+    it('ナビバーが表示される', function () {
+        learnjs.showView('');
+        expect($('.nav-container').length).toEqual(1);
+    });
     it('problem viewが表示される (can show a problem view)', function () {
         // problem viewが表示されることを確認する
         learnjs.showView('#problem-1');
