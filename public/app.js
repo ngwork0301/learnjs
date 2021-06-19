@@ -1,10 +1,14 @@
 'use strict';
 var learnjs = {};
 
+learnjs.landingView = function () {
+    return learnjs.template('landing-view');
+}
+
 learnjs.problemView = function(data) { 
     // templetes の .problem-viewをコピーして、問題番号をタイトルにつけて表示
     var problemNumber = parseInt(data, 10);
-    var view = $('.templates .problem-view').clone();
+    var view = learnjs.template('problem-view');
     var problemData = learnjs.problems[problemNumber - 1];
     var resultFlash = view.find('.result');
 
@@ -34,7 +38,8 @@ learnjs.template = function (name) {
 }
 learnjs.showView = function (hash) {
     var routes = {
-        '#problem': learnjs.problemView
+        '#problem': learnjs.problemView,
+        '': learnjs.landingView
     };
     var hashParts = hash.split('-');
     var viewFn = routes[hashParts[0]];
