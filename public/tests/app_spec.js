@@ -58,11 +58,20 @@ describe('LearnJS', function () {
             expect(view.find('.result').text()).toEqual('Incorrect!')
         });
         it('次の問題へのリンクを表示する', function () {
-            view.find('.correct-flash').val('true');
+            view.find('.answer').val('true');
             view.find('.check-btn').click();
             var resultFlash = view.find('.result');
             expect(resultFlash.find('a').text()).toEqual('Next Problem');
             expect(resultFlash.find('a').attr('href')).toEqual('#problem-2');
-        })
+        });
+        it("最後の問題に正解後は、You're Finished!を表示", function(){
+            lastNumber = learnjs.problems.length;
+            view = learnjs.problemView(lastNumber);
+            view.find('.answer').val('7');
+            view.find('.check-btn').click();
+            var resultFlash = view.find('.result');
+            expect(resultFlash.text()).toContain("Correct! You're Finished!");
+            expect(resultFlash.find('a').text()).not.toContain('Next Problem');
+        });
     })
 });
