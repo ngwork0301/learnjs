@@ -16,9 +16,10 @@ learnjs.problemView = function(data) {
 
     function checkAnswerClick(){
         if (checkAnswer()) {
-            resultFlash.text('Correct!');
+            var correctionFlash = learnjs.buildCorrectFlash(problemNumber);
+            learnjs.flashElement(resultFlash, correctionFlash)
         } else {
-            resultFlash.text('Incorrect!');
+            learnjs.flashElement(resultFlash, 'Incorrect!')
         }
         return false;
     }
@@ -27,6 +28,9 @@ learnjs.problemView = function(data) {
     view.find('.title').text('problem #' + problemNumber);
     learnjs.applyObject(learnjs.problems[problemNumber-1], view);
     return view;
+}
+learnjs.template = function (name) {
+    return $('.templates .' + name).clone();
 }
 learnjs.showView = function (hash) {
     var routes = {
@@ -56,6 +60,23 @@ learnjs.problems = [
     },
     {
         description: "Simple Math",
-        code: "function problem() { return 42 ==== 6 * __; "
+        code: "function problem() { return 42 === 6 * __;}"
     }
 ];
+learnjs.flashElement = function (elem, content) {
+    elem.fadeOut('fast', function () {
+        elem.html(content);
+        elem.fadeIn();
+    });
+}
+learnjs.buildCorrectFlash = function (problemNum) {
+    var correctFlash = learnjs.template('correct-flash');
+    var link = correctFlash.find('a');
+    if (problemNum < learnjs.problems.length) {
+        link.attr('href', '#problem-' + (problemNum + 1));
+    } else {
+        link.attr('href', '');
+        link.text("You're Finished!");
+    }
+    return correctFlash;
+}

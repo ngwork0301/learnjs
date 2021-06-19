@@ -50,12 +50,19 @@ describe('LearnJS', function () {
         it('ボタンアクションで正しい答えをチェックできる (can check a correct answer by hitting a button)', function () {
             view.find('.answer').val('true');
             view.find('.check-btn').click();
-            expect(view.find('.result').text()).toEqual('Correct!');
+            expect(view.find('.result').text()).toContain('Correct!');
         });
         it('不正解をリジェクトする (reject an incorrect answer)', function(){
             view.find('.answer').val('false');
             view.find('.check-btn').click();
             expect(view.find('.result').text()).toEqual('Incorrect!')
         });
+        it('次の問題へのリンクを表示する', function () {
+            view.find('.correct-flash').val('true');
+            view.find('.check-btn').click();
+            var resultFlash = view.find('.result');
+            expect(resultFlash.find('a').text()).toEqual('Next Problem');
+            expect(resultFlash.find('a').attr('href')).toEqual('#problem-2');
+        })
     })
 });
