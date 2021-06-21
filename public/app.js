@@ -99,5 +99,5 @@ learnjs.buildCorrectFlash = function (problemNum) {
     return correctFlash;
 }
 learnjs.triggerEvent = function(name, args) {
-    $('view-container>*').trigger(name, args);
+    $('.view-container>*').trigger(name, args);
 }
