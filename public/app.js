@@ -1,4 +1,9 @@
 'use strict';
+
+function googleSignIn() {
+    console.log(arguments);
+}
+
 var learnjs = {};
 
 learnjs.landingView = function () {
