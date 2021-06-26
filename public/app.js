@@ -1,14 +1,55 @@
 'use strict';
 
-function googleSignIn() {
-    console.log(arguments);
+function googleSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    AWS.config.update({
+        region: 'us-east-1',
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: learnjs.IdentityPoolId,
+            Logins: {
+                'acounts.google.com': id_token
+            }
+        })
+    })
+    function refresh(){
+        return gapi.auth2.getAuthInstance().signIn({
+            prompt: 'login'
+        }).then(function(userUpdate) {
+            var creds = AWS.config.credentials;
+            var newToken = userUpdate.getAuthResponse().id_token;
+            creds.params.Logins['accounts.google.com'] = newToken;
+            return learnjs.awsRefresh();
+        })
+    }
 }
 
-var learnjs = {};
+var learnjs = {
+    poolId: 'us-east-1:e012e009-339f-499b-bec3-9e136e6d563f'
+};
+learnjs.identity = new $.Deferred();
 
 learnjs.landingView = function () {
     return learnjs.template('landing-view');
 }
+
+learnjs.awsRefresh = function() {
+    var deferred = new $.Deferred();
+    AWS.config.credentials.refresh(function(err) {
+        if (err) {
+            deferred.reject(err);
+        } else {
+            deferred.resolve(AWS.config.credentials.identityId);
+        }
+    })
+}
+
+learnjs.awsRefresh().then(function(id) {
+    learnjs.identity.resolve({
+        id: id,
+        email: googleUser.getBasicProfile().getEmail(),
+        refresh: refresh
+    });
+});
 
 learnjs.problemView = function(data) { 
     // templetes の .problem-viewをコピーして、問題番号をタイトルにつけて表示
