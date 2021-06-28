@@ -40,7 +40,8 @@ learnjs.awsRefresh = function() {
         } else {
             deferred.resolve(AWS.config.credentials.identityId);
         }
-    })
+    });
+    return deferred.promise();
 }
 
 learnjs.awsRefresh().then(function(id) {
