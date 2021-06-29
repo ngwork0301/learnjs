@@ -5,7 +5,7 @@ function googleSignIn(googleUser) {
     AWS.config.update({
         region: 'us-east-1',
         credentials: new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: learnjs.IdentityPoolId,
+            IdentityPoolId: learnjs.poolId,
             Logins: {
                 'acounts.google.com': id_token
             }
