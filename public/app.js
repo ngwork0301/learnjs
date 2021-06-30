@@ -21,6 +21,13 @@ function googleSignIn(googleUser) {
             return learnjs.awsRefresh();
         })
     }
+    learnjs.awsRefresh().then(function(id) {
+        learnjs.identity.resolve({
+            id: id,
+            email: googleUser.getBasicProfile().getEmail(),
+            refresh: refresh
+        });
+    });
 }
 
 var learnjs = {
