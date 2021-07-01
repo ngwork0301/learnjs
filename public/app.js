@@ -51,14 +51,6 @@ learnjs.awsRefresh = function() {
     return deferred.promise();
 }
 
-learnjs.awsRefresh().then(function(id) {
-    learnjs.identity.resolve({
-        id: id,
-        email: googleUser.getBasicProfile().getEmail(),
-        refresh: refresh
-    });
-});
-
 learnjs.problemView = function(data) { 
     // templetes の .problem-viewをコピーして、問題番号をタイトルにつけて表示
     var problemNumber = parseInt(data, 10);
