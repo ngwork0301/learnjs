@@ -7,7 +7,7 @@ function googleSignIn(googleUser) {
         credentials: new AWS.CognitoIdentityCredentials({
             IdentityPoolId: learnjs.poolId,
             Logins: {
-                'acounts.google.com': id_token
+                'accounts.google.com': id_token
             }
         })
     })
@@ -159,5 +159,5 @@ learnjs.profileView = function() {
 learnjs.addProfileLink = function(profile) {
     var link = learnjs.template('profile-link');
     link.find('a').text(profile.email);
-    $('.siginin-bar').prepend(link);
+    $('.signin-bar').prepend(link);
 }
