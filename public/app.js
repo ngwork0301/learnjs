@@ -67,9 +67,10 @@ learnjs.problemView = function(data) {
     function checkAnswerClick(){
         if (checkAnswer()) {
             var correctionFlash = learnjs.buildCorrectFlash(problemNumber);
-            learnjs.flashElement(resultFlash, correctionFlash)
+            learnjs.flashElement(resultFlash, correctionFlash);
+            learnjs.saveAnswer(problemNumber, answer.val());
         } else {
-            learnjs.flashElement(resultFlash, 'Incorrect!')
+            learnjs.flashElement(resultFlash, 'Incorrect!');
         }
         return false;
     }
@@ -134,7 +135,7 @@ learnjs.flashElement = function (elem, content) {
         elem.html(content);
         elem.fadeIn();
     });
-}
+};
 learnjs.buildCorrectFlash = function (problemNum) {
     var correctFlash = learnjs.template('correct-flash');
     var link = correctFlash.find('a');
@@ -145,22 +146,22 @@ learnjs.buildCorrectFlash = function (problemNum) {
         link.text("You're Finished!");
     }
     return correctFlash;
-}
+};
 learnjs.triggerEvent = function(name, args) {
     $('.view-container>*').trigger(name, args);
-}
+};
 learnjs.profileView = function() {
     var view = learnjs.template('profile-view');
     learnjs.identity.done(function(identity) {
         view.find('.email').text(identity.email);
     });
     return view;
-}
+};
 learnjs.addProfileLink = function(profile) {
     var link = learnjs.template('profile-link');
     link.find('a').text(profile.email);
     $('.signin-bar').prepend(link);
-}
+};
 learnjs.sendDbRequest = function(req, retry) {
     var promise = new $.Deferred();
     req.on('error', function (error) {
@@ -168,7 +169,7 @@ learnjs.sendDbRequest = function(req, retry) {
             learnjs.identity.then(function(identity) {
                 return identity.refresh().then(function() {
                     return retry();
-                }, function() {
+                }, function(resp) {
                     promise.reject(resp);
                 });
             });
@@ -181,4 +182,20 @@ learnjs.sendDbRequest = function(req, retry) {
     });
     req.send();
     return promise;
-}
+};
+learnjs.saveAnswer = function(problemId, answer) {
+    return learnjs.identity.then(function(identity) {
+        var db = new AWS.DynamoDB.DocumentClient();
+        var item = {
+            TableName: 'learnjs',
+            Item: {
+                userId: identity.id,
+                problemId: problemId,
+                answer: answer
+            }
+        };
+        return learnjs.sendDbRequest(db.put(item), function() {
+            return learnjs.saveAnswer(problemId, answer);
+        })
+    });
+};
