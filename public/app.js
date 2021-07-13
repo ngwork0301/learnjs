@@ -55,12 +55,12 @@ learnjs.problemView = function(data) {
     // templetes の .problem-viewをコピーして、問題番号をタイトルにつけて表示
     var problemNumber = parseInt(data, 10);
     var view = learnjs.template('problem-view');
+    var answer = view.find('.answer');
     var problemData = learnjs.problems[problemNumber - 1];
     var resultFlash = view.find('.result');
 
     function checkAnswer() {
-        var answer = view.find('.answer').val();
-        var test = problemData.code.replace('__', answer) + ('; problem();');
+        var test = problemData.code.replace('__', answer.val()) + ('; problem();');
         return eval(test);
     }
 
