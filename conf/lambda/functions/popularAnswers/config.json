@@ -1,6 +1,6 @@
 {
     "Runtime": "nodejs14.x", 
     "Timeout": 5, 
-    "MemorySize": 128, 
+    "MemorySize": 512, 
     "Publish": true
 }
