@@ -4,17 +4,17 @@
     "Runtime": "nodejs14.x",
     "Role": "arn:aws:iam::433955479424:role/learnjs_lambda_exec",
     "Handler": "index.popularAnswers",
-    "CodeSize": 787068,
+    "CodeSize": 787526,
     "Description": "",
     "Timeout": 5,
     "MemorySize": 512,
-    "LastModified": "2021-07-22T13:59:48.655+0000",
-    "CodeSha256": "oN4L88cLd5H8CCQzzppi8LpKR0u1PAvfTeym/DIzpw8=",
-    "Version": "1",
+    "LastModified": "2021-07-24T22:44:38.502+0000",
+    "CodeSha256": "bylrkM49EWLNfdnMM0uT2pQqUhW2xR9IFX+FfejVlj8=",
+    "Version": "$LATEST",
     "TracingConfig": {
         "Mode": "PassThrough"
     },
-    "RevisionId": "41141724-14f4-4089-8cac-0a4a477b5bb8",
+    "RevisionId": "ce9a10f2-9ddf-4e85-a8e7-47fd4fd7420a",
     "State": "Active",
     "LastUpdateStatus": "Successful",
     "PackageType": "Zip"

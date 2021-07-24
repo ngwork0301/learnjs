@@ -4,17 +4,17 @@
     "Runtime": "nodejs14.x",
     "Role": "arn:aws:iam::433955479424:role/learnjs_lambda_exec",
     "Handler": "index.echo",
-    "CodeSize": 787068,
+    "CodeSize": 787526,
     "Description": "",
     "Timeout": 5,
     "MemorySize": 128,
-    "LastModified": "2021-07-20T21:33:01.077+0000",
-    "CodeSha256": "9AEIjoelZRcOxtltdt3cWUJQpr2sHT1eR9NJcYD865U=",
-    "Version": "1",
+    "LastModified": "2021-07-24T22:44:35.299+0000",
+    "CodeSha256": "bylrkM49EWLNfdnMM0uT2pQqUhW2xR9IFX+FfejVlj8=",
+    "Version": "$LATEST",
     "TracingConfig": {
         "Mode": "PassThrough"
     },
-    "RevisionId": "487e30bc-b4f7-4e24-89a2-1fa985a27926",
+    "RevisionId": "fe4a6eb9-07b6-4501-b062-5dc0f4d2e8b6",
     "State": "Active",
     "LastUpdateStatus": "Successful",
     "PackageType": "Zip"

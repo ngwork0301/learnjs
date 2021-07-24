@@ -13,7 +13,7 @@ describe('lambda function', function() {
       expect(index.dynamodb.scan).toHaveBeenCalledWith({
         FilterExpression: "problemId = :problemId",
         ExpressionAttributeValues: { ":problemId": 42 },
-        TableName: "leanjs"
+        TableName: "learnjs"
       }, jasmine.any(Function));
     });
   });
