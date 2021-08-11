@@ -1,0 +1,10 @@
+{
+    "Bucket": "learnjs.ngwork0301.com",
+    "BucketLoggingStatus": {
+        "LoggingEnabled": {
+            "TargetBucket": "learnjs-logging.ngwork0301.com",
+            "TargetGrants": [],
+            "TargetPrefix": ""
+        }
+    }
+}
